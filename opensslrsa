@@ -1,0 +1,19 @@
+Generate the private key using:
+openssl genrsa -out private.pem 2048
+
+Generate the public key using:
+openssl rsa -in private.pem -pubout -out public.pem
+
+Check for the key contents: (NOT A PART OF THIS PROCESS)
+openssl rsa -in private.pem -text -noout
+openssl rsa -in public.pem -pubin -text -noout
+
+Write a new file:
+echo HelloRSA > message.txt
+
+Encrypt the file/anything:
+openssl pkeyutl -encrypt -pubin -inkey public.pem -in message.txt -out message.enc
+
+
+Decrypt it:
+openssl pkeyutl -decrypt -inkey private.pem -in message.enc -out message.dec
